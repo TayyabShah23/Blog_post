@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>{{ blog.title }}</h2>
+<p><strong>By:</strong> {{ blog.author }} | <strong>Category:</strong> {{ blog.category.name }} | <strong>Date:</strong> {{ blog.created_at|date:"M d, Y" }}</p>
+{% if blog.image %}
+<img src="{{ blog.image.url }}" class="img-fluid mb-3" alt="Blog Image">
+{% endif %}
+<p>{{ blog.content }}</p>
+
+{% if user == blog.author %}
+  <a href="{% url 'edit_blog' blog.id %}" class="btn btn-warning">Edit</a>
+  <a href="{% url 'delete_blog' blog.id %}" class="btn btn-danger">Delete</a>
+{% endif %}
+{% endblock %}
